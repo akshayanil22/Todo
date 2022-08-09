@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:todo_manager/add_todo.dart';
+
+import 'today_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -11,6 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
+        backgroundColor: Colors.white,
           appBarTheme: const AppBarTheme(
               color: Colors.white,
               elevation: 0,
@@ -31,7 +35,7 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatelessWidget {
 
-  bool value = false;
+  // bool value = false;
   MyHomePage({Key? key}) : super(key: key);
 
   @override
@@ -41,7 +45,9 @@ class MyHomePage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text('Task Manager'),
-          actions: [IconButton(onPressed: () {}, icon: Icon(Icons.add_circle))],
+          actions: [IconButton(onPressed: () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AddTodo()));
+          }, icon: Icon(Icons.add_circle))],
         ),
         body: Column(
           children: [
@@ -82,64 +88,7 @@ class MyHomePage extends StatelessWidget {
                   ),
                   Expanded(
                     child: TabBarView(children: [
-                      Padding(
-                        padding: const EdgeInsets.all(20),
-                        child: Column(
-                          children: [
-                            Container(
-                              padding: EdgeInsets.all(20),
-                              decoration: BoxDecoration(
-                                color: Color(0xFF282828),
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                    IconButton(onPressed: (){}, icon: Icon(Icons.edit_note,color: Colors.white,))
-                                  ],),
-                                  Text('Taking notes tonight',style: TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.bold),),
-                                  SizedBox(height: 30,),
-                                  Row(children: [
-                                    Icon(Icons.calendar_today,color: Colors.white,),
-                                    SizedBox(width: 10,),
-                                    Text('04 July 2022',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
-                                  ],),
-                                  SizedBox(height: 10,),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Icon(Icons.schedule,color: Colors.white,),
-                                            SizedBox(width: 10,),
-                                            Text('7:30 PM',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
-                                          ],
-                                        ),
-                                        Transform.scale(
-                                          scale: 1.5,
-                                          child: Checkbox(value: value, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),side: BorderSide(
-                                            color: Colors.white,
-                                            width: 2,
-                                          ),onChanged: (value){
-                                            this.value = value!;
-                                          },
-                                            activeColor: Colors.white,
-                                            focusColor: Colors.white,
-                                            checkColor: Colors.black,
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
+                      TodayScreen(),
                       Center(child: Text('Upcoming'),),
                       Center(child: Text('Task Done'),),
                     ]),
@@ -153,3 +102,4 @@ class MyHomePage extends StatelessWidget {
     );
   }
 }
+
