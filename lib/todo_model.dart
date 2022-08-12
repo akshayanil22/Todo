@@ -1,10 +1,10 @@
 class TodoModel{
   int? id;
-  late final String title;
-  late final String date;
-  bool? isDone;
+  String? title;
+  String? date;
+  int? isDone;
 
-  TodoModel({this.id,required this.title,required this.date,required this.isDone});
+  TodoModel({this.id,this.title,this.date,this.isDone});
 
   Map<String,dynamic> toMap(){
     return {
@@ -15,7 +15,7 @@ class TodoModel{
     };
   }
 
-  TodoModel.fromJson(Map<String,dynamic> Todo){
+  TodoModel.fromMap(Map<String,dynamic> Todo){
     id= Todo['id'];
     title= Todo['title'];
     date= Todo['date'];

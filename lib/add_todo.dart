@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:todo_manager/todo_controller.dart';
+import 'package:todo_manager/todo_model.dart';
 
 
 class AddTodo extends StatefulWidget {
@@ -10,6 +13,8 @@ class AddTodo extends StatefulWidget {
 }
 
 class _AddTodoState extends State<AddTodo> {
+
+final TodoController todoController = Get.find();
 
   DateTime selectedDate = DateTime.now();
   TimeOfDay selectedTime = TimeOfDay.now();
@@ -114,9 +119,24 @@ class _AddTodoState extends State<AddTodo> {
                     const Icon(Icons.schedule,size: 18,),
                   ],
                 )),
+            Spacer(),
+            ElevatedButton(onPressed: () async{
+              print('button Clicked');
+              final TodoModel task = TodoModel();
+              _addTaskToDB(task);
+              await todoController.addTask(task);
+              Get.back();
+            }, child: const Text('Save')),
           ],
         ),
       )
     );
   }
+
+  _addTaskToDB(TodoModel task) {
+    task.isDone = 0;
+    task.title = todoTextController.text;
+    task.date = getDateTime();
+  }
+
 }

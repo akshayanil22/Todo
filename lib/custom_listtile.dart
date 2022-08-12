@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 
 class CustomListTile extends StatefulWidget {
+
+  final String title;
+  final String date;
+  final String time;
   const CustomListTile({
     Key? key,
+    required this.title,
+    required this.date,
+    required this.time,
   }) : super(key: key);
 
   @override
@@ -38,7 +45,7 @@ class _CustomListTileState extends State<CustomListTile> {
               ],
             ),
             Text(
-              'Taking notes tonight',
+              widget.title,
               style: TextStyle(
                   color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
             ),
@@ -46,16 +53,16 @@ class _CustomListTileState extends State<CustomListTile> {
               height: 30,
             ),
             Row(
-              children: const [
-                Icon(
+              children:  [
+                const Icon(
                   Icons.calendar_today,
                   color: Colors.white,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
                 Text(
-                  '04 July 2022',
+                  widget.date,
                   style:
                       TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                 ),
@@ -69,8 +76,8 @@ class _CustomListTileState extends State<CustomListTile> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
-                  children: const [
-                    Icon(
+                  children:  [
+                    const Icon(
                       Icons.schedule,
                       color: Colors.white,
                     ),
@@ -78,7 +85,7 @@ class _CustomListTileState extends State<CustomListTile> {
                       width: 10,
                     ),
                     Text(
-                      '7:30 PM',
+                      widget.time,
                       style: TextStyle(
                           color: Colors.white, fontWeight: FontWeight.bold),
                     ),
