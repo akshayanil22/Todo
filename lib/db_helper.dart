@@ -24,7 +24,7 @@ class DBHelper{
 
   _onCreate(Database db, int version) async {
     await db.execute('CREATE TABLE $_todo_table('
-        'id INTEGER PRIMARY KEY AUTOINCREMENT, title STRING, date STRING,isDone BOOLEAN'
+        'id INTEGER PRIMARY KEY AUTOINCREMENT, title STRING, date STRING,isDone INT'
         ')');
   }
 
@@ -37,8 +37,37 @@ class DBHelper{
     });
   }
 
-  Future<List<Map<String, dynamic>>> queryAllRows() async {
+  // Future<List<Map<String, dynamic>>> queryAllRows() async {
+  //   Database? db = DBHelper._database;
+  //   return await db!.query(_todo_table);
+  // }
+
+  Future<List<Map<String, dynamic>>> queryAllDone(int isDone) async {
     Database? db = DBHelper._database;
-    return await db!.query(_todo_table);
+    return await db!.query(_todo_table,where: 'isDone = ?',whereArgs: [isDone]);
   }
+
+  Future<List<Map<String, dynamic>>> queryAll(int isDone) async {
+    Database? db = DBHelper._database;
+    return await db!.query(_todo_table,where: 'isDone = ?',whereArgs: [isDone]);
+  }
+
+  Future<int> delete(int id) async {
+    Database? db = DBHelper._database;
+    return await db!.delete(_todo_table, where: 'id = ?', whereArgs: [id]);
+  }
+
+  Future<int> deleteAllTasks() async {
+    Database? db = DBHelper._database;
+    return await db!.delete(_todo_table);
+  }
+
+  Future<int> update(int id)async{
+    return await _database!.rawUpdate('''
+    UPDATE $_todo_table
+    SET isDone = ?
+    WHERE id = ?
+    ''',[1, id]);
+  }
+
 }

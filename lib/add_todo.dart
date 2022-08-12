@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:todo_manager/main.dart';
 import 'package:todo_manager/todo_controller.dart';
 import 'package:todo_manager/todo_model.dart';
 
@@ -120,13 +121,21 @@ final TodoController todoController = Get.find();
                   ],
                 )),
             Spacer(),
-            ElevatedButton(onPressed: () async{
-              print('button Clicked');
-              final TodoModel task = TodoModel();
-              _addTaskToDB(task);
-              await todoController.addTask(task);
-              Get.back();
-            }, child: const Text('Save')),
+            SizedBox(
+              width: double.infinity,
+              height: MediaQuery.of(context).size.height/12,
+              child: ElevatedButton(onPressed: () async{
+                final TodoModel task = TodoModel();
+                _addTaskToDB(task);
+                await todoController.addTask(task);
+                Get.off(()=>MyHomePage());
+              }, child: const Text('Save'),
+              style: ElevatedButton.styleFrom(
+                primary: Colors.black,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+              ),
+              ),
+            ),
           ],
         ),
       )

@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:todo_manager/todo_controller.dart';
 
 class CustomListTile extends StatefulWidget {
 
   final String title;
   final String date;
   final String time;
+  final int? id;
+  final bool isComplete;
   const CustomListTile({
     Key? key,
     required this.title,
     required this.date,
     required this.time,
+    required this.id,
+    required this.isComplete,
   }) : super(key: key);
 
   @override
@@ -17,9 +24,7 @@ class CustomListTile extends StatefulWidget {
 }
 
 class _CustomListTileState extends State<CustomListTile> {
-
-  bool value = false;
-
+  TodoController todoController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -91,10 +96,10 @@ class _CustomListTileState extends State<CustomListTile> {
                     ),
                   ],
                 ),
-                Transform.scale(
+                widget.isComplete?SizedBox():Transform.scale(
                   scale: 1.5,
                   child: Checkbox(
-                    value: value,
+                    value: widget.isComplete,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5)),
                     side: const BorderSide(
@@ -103,7 +108,9 @@ class _CustomListTileState extends State<CustomListTile> {
                     ),
                     onChanged: (value) {
                       setState((){
-                        this.value = value!;
+                        // this.value = widget.isComplete;
+                        todoController.markAsCompleted(widget.id!);
+                        widget.isComplete?todoController.getDoneTask(1):todoController.getTask(0);
                       });
                     },
                     activeColor: Colors.white,

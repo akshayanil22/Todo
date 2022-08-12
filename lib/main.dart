@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todo_manager/add_todo.dart';
+import 'package:todo_manager/task_done_screen.dart';
 import 'db_helper.dart';
 import 'today_screen.dart';
 
@@ -8,7 +9,7 @@ void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   // await GetStorage.init();
   await DBHelper().database;
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -90,11 +91,11 @@ class MyHomePage extends StatelessWidget {
                           Tab(text: 'Task Done'),
                         ]),
                   ),
-                  Expanded(
+                  const Expanded(
                     child: TabBarView(children: [
                       TodayScreen(),
                       Center(child: Text('Upcoming'),),
-                      Center(child: Text('Task Done'),),
+                      TaskDoneScreen(),
                     ]),
                   )
                 ],
