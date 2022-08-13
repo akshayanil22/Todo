@@ -128,7 +128,8 @@ final TodoController todoController = Get.find();
                 final TodoModel task = TodoModel();
                 _addTaskToDB(task);
                 await todoController.addTask(task);
-                Get.off(()=>MyHomePage());
+                // Get.offAll(()=>MyHomePage());
+                Get.back();
               }, child: const Text('Save'),
               style: ElevatedButton.styleFrom(
                 primary: Colors.black,

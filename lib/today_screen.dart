@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:intl/intl.dart';
 import 'package:todo_manager/todo_controller.dart';
 import 'package:todo_manager/todo_model.dart';
 
@@ -21,21 +22,21 @@ class _TodayScreenState extends State<TodayScreen> {
   @override
   void initState() {
     super.initState();
-    todoController.getTask(0);
+    todoController.getTaskToday(0,DateFormat('dd-MMMM-yyyy').format(DateTime.now()));
   }
 
   @override
   Widget build(BuildContext context) {
     return Obx(() => Padding(
-      padding: const EdgeInsets.all(20),
-      child: todoController.todoList.isEmpty?const Center(child: Text('No Data')) :ListView.builder(itemCount: todoController.todoList.length,
+      padding: const EdgeInsets.fromLTRB(20,20,20,0),
+      child: todoController.todayTodoList.isEmpty?const Center(child: Text('No Data')) :ListView.builder(itemCount: todoController.todayTodoList.length,
       itemBuilder: (context,index){
-        List<String> date = todoController.todoList[index].date.split(" ");
-        TodoModel task = todoController.todoList[index];
+        List<String> date = todoController.todayTodoList[index].date.split(" ");
+        TodoModel task = todoController.todayTodoList[index];
         return GestureDetector(
           onLongPress: () async{
             await todoController.deleteTask(task.id!);
-            todoController.getTask(0);
+            todoController.getTaskToday(0,DateFormat('dd-MMMM-yyyy').format(DateTime.now()));
           },
           child: CustomListTile(
             title: task.title!,

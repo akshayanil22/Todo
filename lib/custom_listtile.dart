@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+import 'package:intl/intl.dart';
 import 'package:todo_manager/todo_controller.dart';
 
 class CustomListTile extends StatefulWidget {
-
   final String title;
   final String date;
   final String time;
   final int? id;
   final bool isComplete;
+
   const CustomListTile({
     Key? key,
     required this.title,
@@ -25,14 +25,15 @@ class CustomListTile extends StatefulWidget {
 
 class _CustomListTileState extends State<CustomListTile> {
   TodoController todoController = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: Container(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          color: Color(0xFF282828),
+          color: const Color(0xFF282828),
           borderRadius: BorderRadius.circular(20),
         ),
         child: Column(
@@ -51,14 +52,16 @@ class _CustomListTileState extends State<CustomListTile> {
             ),
             Text(
               widget.title,
-              style: TextStyle(
-                  color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold),
             ),
             const SizedBox(
               height: 30,
             ),
             Row(
-              children:  [
+              children: [
                 const Icon(
                   Icons.calendar_today,
                   color: Colors.white,
@@ -68,8 +71,8 @@ class _CustomListTileState extends State<CustomListTile> {
                 ),
                 Text(
                   widget.date,
-                  style:
-                      TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
                 ),
               ],
             ),
@@ -81,43 +84,52 @@ class _CustomListTileState extends State<CustomListTile> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
-                  children:  [
+                  children: [
                     const Icon(
                       Icons.schedule,
                       color: Colors.white,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     Text(
                       widget.time,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.white, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
-                widget.isComplete?SizedBox():Transform.scale(
-                  scale: 1.5,
-                  child: Checkbox(
-                    value: widget.isComplete,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5)),
-                    side: const BorderSide(
-                      color: Colors.white,
-                      width: 2,
-                    ),
-                    onChanged: (value) {
-                      setState((){
-                        // this.value = widget.isComplete;
-                        todoController.markAsCompleted(widget.id!);
-                        widget.isComplete?todoController.getDoneTask(1):todoController.getTask(0);
-                      });
-                    },
-                    activeColor: Colors.white,
-                    focusColor: Colors.white,
-                    checkColor: Colors.black,
-                  ),
-                )
+                widget.isComplete
+                    ? const SizedBox()
+                    : Transform.scale(
+                        scale: 1.5,
+                        child: Checkbox(
+                          value: widget.isComplete,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5)),
+                          side: const BorderSide(
+                            color: Colors.white,
+                            width: 2,
+                          ),
+                          onChanged: (value) {
+                            // this.value = widget.isComplete;
+                            todoController.markAsCompleted(widget.id!);
+                            widget.isComplete
+                                ? todoController.getDoneTask(1)
+                                : todoController.getTaskToday(
+                                    0,
+                                    DateFormat('dd-MMMM-yyyy')
+                                        .format(DateTime.now()));
+                            todoController.getTaskNotToday(
+                                0,
+                                DateFormat('dd-MMMM-yyyy')
+                                    .format(DateTime.now()));
+                          },
+                          activeColor: Colors.white,
+                          focusColor: Colors.white,
+                          checkColor: Colors.black,
+                        ),
+                      )
               ],
             ),
           ],

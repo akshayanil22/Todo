@@ -27,7 +27,7 @@ class _TaskDoneScreenState extends State<TaskDoneScreen> {
   @override
   Widget build(BuildContext context) {
     return Obx(() => Padding(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.fromLTRB(20,20,20,0),
       child:todoController.listIsDone.isEmpty ?Center(child: Text('No Data'),):ListView.builder(itemCount: todoController.listIsDone.length,
         itemBuilder: (context,index){
           List<String> date = todoController.listIsDone[index].date.split(" ");

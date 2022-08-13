@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todo_manager/add_todo.dart';
 import 'package:todo_manager/task_done_screen.dart';
+import 'package:todo_manager/upcoming_screen.dart';
 import 'db_helper.dart';
 import 'today_screen.dart';
 
@@ -47,7 +48,7 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 3,
-      child: Scaffold(
+      child:Scaffold(
         appBar: AppBar(
           title: Text('Task Manager'),
           actions: [IconButton(onPressed: () {
@@ -94,7 +95,7 @@ class MyHomePage extends StatelessWidget {
                   const Expanded(
                     child: TabBarView(children: [
                       TodayScreen(),
-                      Center(child: Text('Upcoming'),),
+                      UpcomingScreen(),
                       TaskDoneScreen(),
                     ]),
                   )
