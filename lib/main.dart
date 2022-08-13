@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:todo_manager/add_todo.dart';
-import 'package:todo_manager/task_done_screen.dart';
-import 'package:todo_manager/upcoming_screen.dart';
-import 'db_helper.dart';
-import 'today_screen.dart';
+import 'package:todo_manager/View/Screen/add_todo.dart';
+import 'package:todo_manager/View/Screen/task_done_screen.dart';
+import 'package:todo_manager/View/Screen/upcoming_screen.dart';
+import 'Database/db_helper.dart';
+import 'View/Screen/today_screen.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();

@@ -1,8 +1,7 @@
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:todo_manager/todo_model.dart';
-
-import 'db_helper.dart';
+import '../Database/db_helper.dart';
+import '../Model/todo_model.dart';
 
 class TodoController extends GetxController {
   final RxList todoList = <TodoModel>[].obs;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:todo_manager/todo_controller.dart';
+import 'package:todo_manager/Controller/todo_controller.dart';
 
 class CustomListTile extends StatefulWidget {
   final String title;

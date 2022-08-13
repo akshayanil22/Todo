@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:todo_manager/todo_controller.dart';
-import 'package:todo_manager/todo_model.dart';
-
-import 'custom_listtile.dart';
+import 'package:todo_manager/Controller/todo_controller.dart';
+import '../../Model/todo_model.dart';
+import '../Widget/custom_listtile.dart';
 
 class TaskDoneScreen extends StatefulWidget {
   const TaskDoneScreen({
